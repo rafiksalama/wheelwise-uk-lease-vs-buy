@@ -18,7 +18,7 @@ than let stale numbers stand.
 
 - **577 live UK lease deals** compared, deal-by-deal, against buying the same
   car nearly-new and selling after the term (`/api/leases` → `total: 577`,
-  576 unique after de-dup across pages).
+  577 unique after de-dup across pages).
 - Each advert priced against **137,552 live UK listings** (AutoTrader, cinch,
   Cazoo, drive.co.uk — September 2026) by a gradient-boosted model
   ([LightGBM](https://lightgbm.readthedocs.io/)). The home page describes this
@@ -39,19 +39,21 @@ than let stale numbers stand.
 
 ## What the live data shows today (snapshot 2026-09-10)
 
-A pull of the 576 unique live deals surfaces a few signals useful for a
+A pull of the 577 unique live deals surfaces a few signals useful for a
 buyer walking into a showroom:
 
-- **Median monthly outlay across all live deals: £323.43**
-  (mean £417.30; range £131.02–£1,723.21).
-- **Term mix**: 48-month deals dominate (342), then 36-month (138), 24-month
+- **Median monthly outlay across all live deals: £323.98**
+  (mean £431.02; range £131.02–£8,332.50; the upper bound is a single
+  Mercedes GLB AMG luxury outlier — the 95th percentile is £934.97).
+- **Term mix**: 48-month deals dominate (343), then 36-month (138), 24-month
   (94), and 18-month (2). Most UK lease brochures lead on 48-month because
   it depresses the headline monthly figure.
-- **Fuel mix**: Electric 250, Petrol 157, Petrol/Plug-In Hybrid 88, Petrol
-  Hybrid 44, Diesel 35, Petrol/LPG 1, Hydrogen 1. Petrol-led electric + PHEV
-  hybrids account for **382 of 576 (66.3%)** of live lease deals.
-- **Body mix**: SUVs of every size dominate (Medium 124, Large 63, Small 32;
-  plus Crossover 75 = 294 of 576 = 51.0%). Hatchback (93) is the only
+- **Fuel mix**: Electric 250, Petrol 158, Petrol/PlugIn Hybrid 88, Petrol
+  Hybrid 44, Diesel 35, Petrol/LPG 1, Hydrogen 1. Pure Electric and any
+  flavour of hybrid together account for **382 of 577 (66.2%)** of live
+  lease deals.
+- **Body mix**: SUVs of every size dominate (Medium 125, Large 63, Small 32;
+  plus Crossover 75 = 295 of 577 = 51.1%). Hatchback (93) is the only
   traditional segment still over 10% of supply.
 - **Cheapest electric lease available right now**: £131.02/month — Citroen
   Ami (6kW, 5.5kWh), 36-month term, mileage cap 30,000. The Ami is a quadricycle;
