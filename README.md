@@ -83,6 +83,11 @@ Auto Trader, cinch, Cazoo, Leaseloco or any dealer. It doesn't sell cars and
 takes no dealer money for placement. No account, no tracking — plates are
 checked against DVLA.
 
+## Weekly grade-A deal digests
+
+- [2026-09-10](digests/2026-09-10.md) — Golf / Fiesta / 3 Series: every row
+  pulled live from the public API and linked to the original advert.
+
 ## Explore
 
 - [Lease vs buy verdicts](https://cars.limoja.ai/leases/) — every deal, live
