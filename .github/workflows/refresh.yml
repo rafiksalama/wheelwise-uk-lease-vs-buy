@@ -1,0 +1,51 @@
+name: Verify live figures
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Pull live figures
+        run: node scripts/fetch-live-figures.mjs > live.json
+
+      - name: Diff headline median against README
+        run: |
+          set -euo pipefail
+          LIVE_MEDIAN=$(node -p 'require("./live.json").median')
+          README_MEDIAN=$(grep -oP 'Median monthly outlay[^£]*£\K[0-9.]+' README.md | head -1)
+          echo "live=$LIVE_MEDIAN readme=$README_MEDIAN"
+          node -e "
+            const live = $LIVE_MEDIAN, rm = $README_MEDIAN;
+            const drift = Math.abs(live - rm) / rm;
+            if (drift > 0.05) {
+              console.error('DRIFT DETECTED: README median £' + rm + ' vs live £' + live + ' (' + (drift * 100).toFixed(1) + '%). Update README before promoting.');
+              process.exit(1);
+            }
+            console.log('OK: drift ' + (drift * 100).toFixed(2) + '%');
+          "
+
+      - name: Open drift issue on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Figure drift: README no longer matches live site',
+              body: 'Scheduled verification failed — README headline figures have drifted more than 5% from the live API. Refresh README.md before citing or promoting these numbers. See the failed workflow run for the exact numbers.',
+              labels: ['drift']
+            });

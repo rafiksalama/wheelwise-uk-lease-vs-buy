@@ -9,6 +9,10 @@ same car nearly-new and selling it after the term — and it publishes its error
 rates.
 
 Last refreshed: **2026-09-10** (figures verified live from the public API).
+Every claim below is re-verified against the live API daily by a
+[scheduled workflow](.github/workflows/refresh.yml) — if any headline figure
+drifts more than 5% from the live site, the repo opens a drift issue rather
+than let stale numbers stand.
 
 ## What the analysis does
 
